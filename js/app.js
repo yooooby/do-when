@@ -1,6 +1,6 @@
-import {slots,readImages,writeImage,validateImage} from './images.js';
-import {today,status,validDate} from './dates.js';
-import {load,save,validate,KEY} from './storage.js';
+import {slots,readImages,writeImage,validateImage} from './images.js?v=7';
+import {today,status,validDate} from './dates.js?v=7';
+import {load,save,validate,KEY} from './storage.js?v=7';
 const $=s=>document.querySelector(s),el=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e};
 let data={schemaVersion:1,items:[]},locked=false,filter=false,editing=null,undo=null;
 function error(message){$('#error').textContent=message;$('#error').hidden=!message;$('#backup-error').textContent=message}
