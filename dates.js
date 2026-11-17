@@ -1,0 +1,5 @@
+export function today(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
+export function validDate(s){if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(s))return false;const [y,m,d]=s.split('-').map(Number);return y>=1900&&y<=9999&&m>=1&&m<=12&&d>=1&&d<=new Date(y,m,0).getDate()}
+function day(s){const [y,m,d]=s.split('-').map(Number);return Math.floor(Date.UTC(y,m-1,d)/86400000)}
+export function addDays(s,n){const [y,m,d]=s.split('-').map(Number);const date=new Date(y,m-1,d);date.setDate(date.getDate()+n);return [date.getFullYear(),String(date.getMonth()+1).padStart(2,'0'),String(date.getDate()).padStart(2,'0')].join('-')}
+export function status(item,now=today()){if(!item.lastCompletedDate)return {label:'미기록',rank:4,due:null,elapsed:null,kind:'empty'};const due=addDays(item.lastCompletedDate,item.cycleDays),left=day(due)-day(now);return {due,elapsed:day(now)-day(item.lastCompletedDate),left,label:left<0?'주기 초과':left===0?'오늘 예정':left<=3?'임박':'정상',rank:left<0?0:left===0?1:left<=3?2:3,kind:left<0?'late':left===0?'due':left<=3?'soon':'good'}};
